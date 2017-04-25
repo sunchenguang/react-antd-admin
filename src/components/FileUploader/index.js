@@ -1,5 +1,5 @@
 import React from 'react';
-import {Upload, Icon, Modal, message, Button, Tooltip} from 'antd';
+import { Upload, Icon, Modal, message, Button, Tooltip } from 'antd';
 import globalConfig from '../../config.js';
 import Utils from '../../utils';
 import Logger from '../../utils/Logger.js';
@@ -24,7 +24,7 @@ class FileUploader extends React.Component {
   };
 
   componentWillMount() {
-    const {defaultValue, max, url, type} = this.props;
+    const { defaultValue, max, url, type } = this.props;
     // 当前是要上传图片还是普通图片? 会影响后续的很多东西
     const forImage = type === 'image';
     if (forImage) {
@@ -81,7 +81,7 @@ class FileUploader extends React.Component {
     // 2. 外界直接setFieldValue, 直接改变这个组件的状态, 这种情况下需要更新
 
     if (this.needRender(nextProps)) {
-      const {value, max} = nextProps;
+      const { value, max } = nextProps;
       this.forceUpdateStateByValue(value, max);
     }
   }
@@ -93,7 +93,7 @@ class FileUploader extends React.Component {
    * @returns {boolean}
    */
   needRender(nextProps) {
-    const {value} = nextProps;
+    const { value } = nextProps;
     // 如果外界传过来的value是undefined或者空字符串, 需要清空文件上传列表
     if (!value) {   // 注意空字符串也是false
       return true;
@@ -195,7 +195,7 @@ class FileUploader extends React.Component {
   /**
    * 预览界面点击取消按钮
    */
-  handleCancel = () => this.setState({previewVisible: false});
+  handleCancel = () => this.setState({ previewVisible: false });
 
   /**
    * 上传文件时的回调, 注意上传过程中会被调用多次
@@ -204,7 +204,7 @@ class FileUploader extends React.Component {
    *
    * @param fileList
    */
-  handleChange = ({file, fileList}) => {
+  handleChange = ({ file, fileList }) => {
     // 还要自己处理一下fileList
     for (const tmp of fileList) {
       if (tmp.status === 'done' && !tmp.url && tmp.response && tmp.response.success) {
@@ -236,7 +236,7 @@ class FileUploader extends React.Component {
 
     // 注意对于controlled components而言, 这步setState必不可少
     // 见https://github.com/ant-design/ant-design/issues/2423
-    this.setState({fileList});
+    this.setState({ fileList });
 
     // 其实这里可能有点小问题
     // notifyFileChange方法会通知上层组件, 文件列表变化了, 对于antd的FormItem而言, 新的值又会通过props.value的形式回传, 导致re-render
@@ -248,7 +248,7 @@ class FileUploader extends React.Component {
    * 文件列表变化后, 通知上层
    */
   notifyFileChange = () => {
-    const {onChange, max} = this.props;
+    const { onChange, max } = this.props;
 
     if (onChange) {
       // 传给回调的参数可能是个string, 也可能是个array, 要判断一下
@@ -276,12 +276,12 @@ class FileUploader extends React.Component {
    * 上传按钮的样式, 跟文件类型/当前状态都有关
    */
   renderUploadButton() {
-    const {fileList} = this.state;
+    const { fileList } = this.state;
     const disabled = fileList.length >= this.props.max;
 
     if (this.forImage) {
       const button = (<div>
-        <Icon type="plus"/>
+        <Icon type="plus" />
         <div className="ant-upload-text">上传图片</div>
       </div>);
       // 对于图片而言, 如果文件数量达到max, 上传按钮直接消失
@@ -298,7 +298,7 @@ class FileUploader extends React.Component {
       }
     } else {
       // 对于普通文件而言, 如果数量达到max, 上传按钮不可用
-      const button = <Button disabled={disabled}><Icon type="upload"/> 上传</Button>;
+      const button = <Button disabled={disabled}><Icon type="upload" /> 上传</Button>;
       // 是否要有提示语
       if (this.props.placeholder && !disabled) {
         return <Tooltip title={this.props.placeholder} mouseLeaveDelay={0}>
@@ -312,7 +312,7 @@ class FileUploader extends React.Component {
 
 
   render() {
-    const {previewVisible, previewImage, fileList} = this.state;
+    const { previewVisible, previewImage, fileList } = this.state;
 
     // 我本来是写成accept="image/*"的, 但chrome下有些bug, 要很久才能弹出文件选择框
     // 只能用后缀名的写法了
@@ -333,7 +333,7 @@ class FileUploader extends React.Component {
         {/*只有上传图片时才需要这个预览modal*/}
         {this.forImage &&
         <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
-          <img alt="图片加载失败" style={{ width: '100%' }} src={previewImage}/>
+          <img alt="图片加载失败" style={{ width: '100%' }} src={previewImage} />
         </Modal>}
       </div>
     );

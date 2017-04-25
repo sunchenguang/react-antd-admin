@@ -15,8 +15,8 @@ class ImageSlider extends React.PureComponent {
   componentWillMount() {
     this.navButton = (
       <span key="navigation">
-        <button type="button" className="image-gallery-left-nav" onClick={this.slideLeft}/>
-        <button type="button" className="image-gallery-right-nav" onClick={this.slideRight}/>
+        <button type="button" className="image-gallery-left-nav" onClick={this.slideLeft} />
+        <button type="button" className="image-gallery-right-nav" onClick={this.slideRight} />
       </span>
     );
   }
@@ -31,7 +31,7 @@ class ImageSlider extends React.PureComponent {
    * 滑动到指定index
    */
   slideToIndex(index) {
-    const {currentIndex} = this.state;
+    const { currentIndex } = this.state;
     const slideCount = this.props.items.length - 1;
 
     let nextIndex = index;
@@ -57,7 +57,7 @@ class ImageSlider extends React.PureComponent {
   renderItem(item) {
     return (
       <div className="image-gallery-image">
-        <img src={item.url} alt={item.alt}/>
+        <img src={item.url} alt={item.alt} />
         { item.description && <span className="image-gallery-description">{item.description}</span> }
       </div>
     );
@@ -69,7 +69,7 @@ class ImageSlider extends React.PureComponent {
 
   _getAlignmentClassName(index) {
     // LEFT, and RIGHT alignments are necessary for lazyLoad
-    let {currentIndex} = this.state;
+    let { currentIndex } = this.state;
     let alignment = '';
     const LEFT = 'left';
     const CENTER = 'center';
@@ -104,7 +104,7 @@ class ImageSlider extends React.PureComponent {
     // For taking care of infinite swipe when there are only two slides
     // 这个offsetPercentage本来是state中的, 但其实根本没用到, 固定是0
     // 从state中删除后, 不想改这个方法的代码, 索性直接给个默认值
-    const {currentIndex, offsetPercentage = 0, previousIndex} = this.state;
+    const { currentIndex, offsetPercentage = 0, previousIndex } = this.state;
     const baseTranslateX = -100 * currentIndex;
     let translateX = baseTranslateX + (index * 100) + offsetPercentage;
 
@@ -146,8 +146,8 @@ class ImageSlider extends React.PureComponent {
   }
 
   _getSlideStyle(index) {
-    const {currentIndex, offsetPercentage = 0} = this.state;
-    const {items} = this.props;
+    const { currentIndex, offsetPercentage = 0 } = this.state;
+    const { items } = this.props;
     const baseTranslateX = -100 * currentIndex;
     const totalSlides = items.length - 1;
 
@@ -195,7 +195,7 @@ class ImageSlider extends React.PureComponent {
 
 
   render() {
-    const {currentIndex} = this.state;
+    const { currentIndex } = this.state;
     const slides = [];
     const bullets = [];
 
@@ -210,7 +210,8 @@ class ImageSlider extends React.PureComponent {
       slides.push(slide);
       bullets.push(
         <button key={index} type="button" className={`image-gallery-bullet ${currentIndex === index ? 'active' : ''}`}
-                onClick={e => this.slideToIndex(index)}/>
+          onClick={e => this.slideToIndex(index)}
+      />
       );
     });
 

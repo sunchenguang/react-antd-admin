@@ -33,7 +33,7 @@ module.exports = [
     title: '是否母语',
     dataType: 'varchar',
     showType: 'radio',
-    options: [{key: 'yes', value: '是'}, {key: 'no', value: '否'}],
+    options: [{ key: 'yes', value: '是' }, { key: 'no', value: '否' }],
   },
   // 级联选择, 和select很类似
   // 同样支持placeholder/defaultValue等属性

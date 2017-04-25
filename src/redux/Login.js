@@ -1,6 +1,6 @@
 // 登录成功的事件
 export const loginSuccessCreator = (userName) => {
-  return {type: 'LOGIN_SUCCESS', payload: userName};
+  return { type: 'LOGIN_SUCCESS', payload: userName };
 };
 
 const initState = {
@@ -11,10 +11,10 @@ const initState = {
 const reducer = (state = initState, action = {}) => {
   switch (action.type) {
     case 'LOGIN_SUCCESS':
-      return {...state, login: true, userName: action.payload};
+      return { ...state, login: true, userName: action.payload };
     default:
       return state;
   }
 };
 
-export default {initState, reducer};
+export default { initState, reducer };

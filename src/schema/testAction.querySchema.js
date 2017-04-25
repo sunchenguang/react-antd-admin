@@ -18,7 +18,7 @@ module.exports = [
     title: '类型',
     dataType: 'int',
     showType: 'select',
-    options: [{key: '1', value: '类型1'}, {key: '2', value: '类型2'}],
+    options: [{ key: '1', value: '类型1' }, { key: '2', value: '类型2' }],
     defaultValue: '1',
   },
 ];

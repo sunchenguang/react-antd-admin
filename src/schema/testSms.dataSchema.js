@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router';
+import { Link } from 'react-router';
 
 module.exports = [
   {
@@ -56,7 +56,7 @@ module.exports = [
     accept: '.pdf',
     sizeLimit: 20480,
     placeholder: '请上传pdf格式, 大小不要超过20M',
-    validator: [{required: true, message: '必填'}],
+    validator: [{ required: true, message: '必填' }],
   },
   {
     key: 'guanshui',
@@ -72,7 +72,7 @@ module.exports = [
     key: 'url',
     title: '个人主页',
     dataType: 'varchar',
-    validator: [{type: 'url', message: '主页有误'}],
+    validator: [{ type: 'url', message: '主页有误' }],
     // 跳转到外部链接例子, 会打开一个新窗口
     // 我本来想要不要加个showType=url, 但考虑了下还是用render去实现吧
     // 对于某些showType(比如image)我会有默认的render, 但用户自定义的render是最优先的
@@ -82,7 +82,7 @@ module.exports = [
     key: 'mail',
     title: '邮箱',
     dataType: 'varchar',
-    validator: [{type: 'email', required: true, message: '邮箱地址有误'}],
+    validator: [{ type: 'email', required: true, message: '邮箱地址有误' }],
     // 跳转邮箱地址例子
     render: (text) => <a href="mailto:foolbeargm@gmail.com" target="_blank">{'foolbeargm@gmail.com'}</a>,
   },
@@ -93,13 +93,13 @@ module.exports = [
     // 跳转其他组件的例子, 可以带参数, 一般用于关联查询之类的
     // 其实就是react-router的配置
     render: (text, record) => <Link to={`/index/option1?name=${record.id}`}>{'跳转其他组件'}</Link>,
-    validator: [{type: 'string', pattern: /^[a-zA-Z0-9]+$/, message: '只能是数字+字母'}],
+    validator: [{ type: 'string', pattern: /^[a-zA-Z0-9]+$/, message: '只能是数字+字母' }],
   },
   {
     key: 'experience',
     title: '使用经验',
     dataType: 'varchar',
-    validator: [{type: 'string', max: 10, message: '最多10个字符!'}],
+    validator: [{ type: 'string', max: 10, message: '最多10个字符!' }],
   },
   {
     key: 'location',

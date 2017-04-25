@@ -1,6 +1,6 @@
 import React from 'react';
-import {Link} from 'react-router';
-import {UpdateGPA1, UpdateGPA2} from '../components/UpdateComponentDemo';
+import { Link } from 'react-router';
+import { UpdateGPA1, UpdateGPA2 } from '../components/UpdateComponentDemo';
 
 module.exports = [
   {
@@ -13,7 +13,7 @@ module.exports = [
     key: 'name',
     title: '姓名',
     dataType: 'varchar',
-    validator: [{type: 'string', max: 10, message: '最多10个字符'}],
+    validator: [{ type: 'string', max: 10, message: '最多10个字符' }],
   },
   {
     key: 'touxiang',
@@ -32,7 +32,7 @@ module.exports = [
     title: '分数',
     dataType: 'int',
     max: 18,
-    validator: [{required: true, message: '必填'}],
+    validator: [{ required: true, message: '必填' }],
   },
   {
     key: 'gpa',

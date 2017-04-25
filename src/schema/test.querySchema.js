@@ -1,5 +1,5 @@
 import React from 'react';
-import {Icon} from 'antd';
+import { Icon } from 'antd';
 
 // 定义某个表的querySchema
 // schema的结构和含义参考下面的例子
@@ -26,7 +26,7 @@ module.exports = [
     // 至于后台用这个值做等值/大于/小于/like, 前端不关心
 
     // 对于varchar类型的字段, 可以设置前置标签和后置标签
-    addonBefore: (<Icon type="user"/>),
+    addonBefore: (<Icon type="user" />),
     defaultValue: 'foolbear', // 默认值
   },
   {
@@ -62,7 +62,7 @@ module.exports = [
     title: '类型',
     dataType: 'int',
     showType: 'select',  // 下拉框选择, antd版本升级后, option的key要求必须是string, 否则会有个warning, 后端反序列化时要注意
-    options: [{key: '1', value: '类型1'}, {key: '2', value: '类型2'}],
+    options: [{ key: '1', value: '类型1' }, { key: '2', value: '类型2' }],
     defaultValue: '1', // 这个defaultValue必须和options中的key是对应的
   },
   {
@@ -70,7 +70,7 @@ module.exports = [
     title: '用户类型',
     dataType: 'varchar',   // 理论上来说, 这里的dataType可以是int/float/varchar甚至datetime, 反正对前端而言都是字符串, 只是后端反序列化时有区别
     showType: 'radio',  // 单选框, 和下拉框schema是一样的, 只是显示时有差别
-    options: [{key: 'typeA', value: '类型A'}, {key: 'typeB', value: '类型B'}],
+    options: [{ key: 'typeA', value: '类型A' }, { key: 'typeB', value: '类型B' }],
     defaultValue: 'typeB',
   },
   {
@@ -101,7 +101,7 @@ module.exports = [
     title: '多选1',
     dataType: 'int',  // 跟select一样, 这里的值其实也可以是int/float/varchar/datetime
     showType: 'checkbox',  // checkbox
-    options: [{key: '1', value: '类型1'}, {key: '2', value: '类型2'}],  // 同样注意, option的key必须是字符串
+    options: [{ key: '1', value: '类型1' }, { key: '2', value: '类型2' }],  // 同样注意, option的key必须是字符串
     defaultValue: ['1', '2'], // 多选的defaultValue是个数组
   },
   {
@@ -109,7 +109,7 @@ module.exports = [
     title: '多选2',
     dataType: 'varchar',
     showType: 'multiSelect',  // 另一种多选
-    options: [{key: 'type1', value: '类型1'}, {key: 'type2', value: '类型2'}],
+    options: [{ key: 'type1', value: '类型1' }, { key: 'type2', value: '类型2' }],
     defaultValue: ['type1'],
   },
   {
@@ -123,7 +123,7 @@ module.exports = [
     title: '多选3',
     dataType: 'varchar',
     showType: 'multiSelect',
-    options: [{key: 'K', value: '开'}, {key: 'F', value: '封'}, {key: 'C', value: '菜'}],
+    options: [{ key: 'K', value: '开' }, { key: 'F', value: '封' }, { key: 'C', value: '菜' }],
     defaultValue: ['K', 'F', 'C'],
   },
   {

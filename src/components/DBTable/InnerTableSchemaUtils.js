@@ -13,7 +13,7 @@ import TableUtils from './TableUtils.js';
 import FileUploader from '../FileUploader';
 import moment from 'moment';
 import Logger from '../../utils/Logger';
-import {ACTION_KEY} from './InnerTableRenderUtils';
+import { ACTION_KEY } from './InnerTableRenderUtils';
 
 const FormItem = Form.Item;
 const RadioGroup = Radio.Group;
@@ -106,7 +106,7 @@ const SchemaUtils = {
    * @param showType
    * @returns {{}}
    */
-  transformOptionMap(options, showType){
+  transformOptionMap(options, showType) {
     const optionMap = {};
 
     // 对于级联选择要特殊处理下
@@ -171,7 +171,7 @@ const SchemaUtils = {
         this.schemaCallback = schemaCallback;
       },
       // 表单挂载后, 给表单一个初始值
-      componentDidMount(){
+      componentDidMount() {
         if (this.props.initData) {  // 这种方法都能想到, 我tm都佩服自己...
           this.props.form.setFieldsValue(this.props.initData);
         }
@@ -224,14 +224,14 @@ const SchemaUtils = {
    *
    * @param schema
    */
-  parseValidator(schema){
+  parseValidator(schema) {
     schema.forEach((field) => {
       if (!field.validator)
         return;
 
       const newRules = [];
       for (const rule of field.validator) {
-        newRules.push(Object.assign({}, rule, {required: false})); // update时没有字段是必填的
+        newRules.push(Object.assign({}, rule, { required: false })); // update时没有字段是必填的
       }
       // 这种$$开头的变量都被我用作内部变量
       field.$$updateValidator = newRules;
@@ -257,7 +257,7 @@ const SchemaUtils = {
     if (field.primary === true) {
       logger.debug('key %o is primary, transform to text area', field);
       return this.colWrapper((getFieldDecorator, forUpdate) => getFieldDecorator(field.key)(
-        <Input type="textarea" autosize={{ minRows: 1, maxRows: 10 }} disabled size="default"/>
+        <Input type="textarea" autosize={{ minRows: 1, maxRows: 10 }} disabled size="default" />
       ), field);
     }
 
@@ -336,14 +336,14 @@ const SchemaUtils = {
     logger.debug('transform field %o to Checkbox component', field);
     const options = [];
     field.options.forEach((option) => {
-      options.push({label: option.value, value: option.key});
+      options.push({ label: option.value, value: option.key });
     });
 
     return this.colWrapper((getFieldDecorator, forUpdate) => getFieldDecorator(field.key, {
       initialValue: forUpdate ? undefined : field.defaultValue,
       rules: forUpdate ? field.$$updateValidator : field.validator,
     })(
-      <CheckboxGroup options={options} disabled={field.disabled}/>
+      <CheckboxGroup options={options} disabled={field.disabled} />
     ), field);
   },
 
@@ -383,7 +383,8 @@ const SchemaUtils = {
       rules: forUpdate ? field.$$updateValidator : field.validator,
     })(
       <Input type="textarea" placeholder={field.placeholder || '请输入'} autosize={{ minRows: 2, maxRows: 10 }}
-             disabled={field.disabled} size="default"/>
+        disabled={field.disabled} size="default"
+    />
     ), field);
   },
 
@@ -400,7 +401,8 @@ const SchemaUtils = {
       rules: forUpdate ? field.$$updateValidator : field.validator,
     })(
       <FileUploader max={field.max} url={field.url} sizeLimit={field.sizeLimit} accept={field.accept}
-                    placeholder={field.placeholder} type="image"/>
+        placeholder={field.placeholder} type="image"
+    />
     ), field);
   },
 
@@ -417,7 +419,8 @@ const SchemaUtils = {
       rules: forUpdate ? field.$$updateValidator : field.validator,
     })(
       <FileUploader max={field.max} url={field.url} sizeLimit={field.sizeLimit} accept={field.accept}
-                    placeholder={field.placeholder}/>
+        placeholder={field.placeholder}
+    />
     ), field);
   },
 
@@ -434,7 +437,8 @@ const SchemaUtils = {
       rules: forUpdate ? field.$$updateValidator : field.validator,
     })(
       <Cascader options={field.options} expandTrigger="hover" placeholder={field.placeholder || '请选择'} size="default"
-                disabled={field.disabled}/>
+        disabled={field.disabled}
+    />
     ), field);
   },
 
@@ -453,7 +457,8 @@ const SchemaUtils = {
           rules: forUpdate ? field.$$updateValidator : field.validator,
         })(
           <InputNumber size="default" max={field.max} min={field.min} placeholder={field.placeholder}
-                       disabled={field.disabled}/>
+            disabled={field.disabled}
+        />
         ), field);
       case 'float':
         logger.debug('transform field %o to float input component', field);
@@ -462,7 +467,8 @@ const SchemaUtils = {
           rules: forUpdate ? field.$$updateValidator : field.validator,
         })(
           <InputNumber step={0.01} size="default" max={field.max} min={field.min} placeholder={field.placeholder}
-                       disabled={field.disabled}/>
+            disabled={field.disabled}
+        />
         ), field);
       case 'datetime':
         logger.debug('transform field %o to datetime input component', field);
@@ -471,7 +477,8 @@ const SchemaUtils = {
           rules: forUpdate ? field.$$updateValidator : field.validator,
         })(
           <DatePicker showTime format="YYYY-MM-DD HH:mm:ss" placeholder={field.placeholder || '请选择日期'}
-                      disabled={field.disabled}/>
+            disabled={field.disabled}
+        />
         ), field);
       default:  // 默认就是普通的输入框
         logger.debug('transform field %o to varchar input component', field);
@@ -480,7 +487,8 @@ const SchemaUtils = {
           rules: forUpdate ? field.$$updateValidator : field.validator,
         })(
           <Input placeholder={field.placeholder} size="default" addonBefore={field.addonBefore}
-                 addonAfter={field.addonAfter} disabled={field.disabled}/>
+            addonAfter={field.addonAfter} disabled={field.disabled}
+        />
         ), field);
     }
   },

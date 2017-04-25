@@ -1,5 +1,5 @@
 import React from 'react';
-import {message, notification, Spin} from 'antd';
+import { message, notification, Spin } from 'antd';
 import Error from '../Error';
 import InnerForm from './InnerForm.js';
 import InnerTable from './InnerTable.js';
@@ -79,7 +79,7 @@ class DBTable extends React.PureComponent {
       this.updateTableState(res);
       // 这个参数用于判断获取schema是同步还是异步
       if (this.state.loadingSchema) {
-        this.setState({loadingSchema: false}, this.refresh);
+        this.setState({ loadingSchema: false }, this.refresh);
       }
     });
   }
@@ -178,7 +178,7 @@ class DBTable extends React.PureComponent {
       }
     }
 
-    const res = {...tmp, tableName, tableConfig};
+    const res = { ...tmp, tableName, tableConfig };
     callback(res);
   }
 
@@ -262,7 +262,7 @@ class DBTable extends React.PureComponent {
       description: `请联系管理员, 错误信息: ${errorMsg}`,
       duration: 0,
     });
-    this.setState({tableLoading: false});
+    this.setState({ tableLoading: false });
   };
 
   /**
@@ -284,7 +284,7 @@ class DBTable extends React.PureComponent {
     const hide = message.loading('正在查询...', 0);
     try {
       const CRUD = ajax.CRUD(this.tableName);
-      this.setState({tableLoading: true});
+      this.setState({ tableLoading: true });
       const res = await CRUD.select(tmpObj);
       // 请求结束后, 提示消失, 但不要急着还原tableLoading的状态, 让上层调用的方法去还原
       hide();
@@ -363,7 +363,7 @@ class DBTable extends React.PureComponent {
     if (!this.inited) {
       return (
         <Spin tip="loading schema..." spinning={this.state.loadingSchema} delay={500}>
-          <Error errorMsg={this.errorMsg}/>
+          <Error errorMsg={this.errorMsg} />
         </Spin>
       );
     }
@@ -375,13 +375,16 @@ class DBTable extends React.PureComponent {
     return (
       <Spin spinning={this.state.loadingSchema} delay={500}>
         <InnerForm parentHandleSubmit={this.handleFormSubmit} schema={this.querySchema} tableConfig={this.tableConfig}
-                   tableName={this.tableName}/>
+          tableName={this.tableName}
+    />
         <InnerTable data={this.state.data} tableLoading={this.state.tableLoading}
-                    schema={this.dataSchema} refresh={this.refresh}
-                    tableConfig={this.tableConfig} tableName={this.tableName}/>
+          schema={this.dataSchema} refresh={this.refresh}
+          tableConfig={this.tableConfig} tableName={this.tableName}
+    />
         <InnerPagination currentPage={this.state.currentPage} total={this.state.total} pageSize={this.state.pageSize}
-                         parentHandlePageChange={this.handlePageChange} tableConfig={this.tableConfig}
-                         tableName={this.tableName}/>
+          parentHandlePageChange={this.handlePageChange} tableConfig={this.tableConfig}
+          tableName={this.tableName}
+    />
       </Spin>
     );
   }

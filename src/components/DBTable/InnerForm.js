@@ -180,7 +180,7 @@ class InnerForm extends React.PureComponent {
 
 
   render() {
-    const {tableName, schema, tableConfig} = this.props;
+    const { tableName, schema, tableConfig } = this.props;
 
     // 根据当前的tableName, 获取对应的表单组件
     const FormComponent = FormSchemaUtils.getForm(tableName, schema);
@@ -197,15 +197,15 @@ class InnerForm extends React.PureComponent {
     return (
       <div className="ant-advanced-search-form">
         {/*这个渲染组件的方法很有意思, 另外注意这里的ref*/}
-        <FormComponent ref={(input) => { this.formComponent = input; }}/>
+        <FormComponent ref={(input) => { this.formComponent = input; }} />
         <Row>
           <Col span={12} offset={12} style={{ textAlign: 'right' }}>
-            <Button type="primary" onClick={this.handleSubmit}><Icon type="search"/>查询</Button>
-            <Button onClick={this.handleReset}><Icon type="cross"/>清除条件</Button>
+            <Button type="primary" onClick={this.handleSubmit}><Icon type="search" />查询</Button>
+            <Button onClick={this.handleReset}><Icon type="cross" />清除条件</Button>
             {tableConfig.showExport ?
-              <Button onClick={this.handleExport}><Icon type="export"/>导出</Button> : ''}
+              <Button onClick={this.handleExport}><Icon type="export" />导出</Button> : ''}
             {tableConfig.showImport ?
-              <Upload {...uploadProps}><Button><Icon type="upload"/>导入</Button></Upload> : ''}
+              <Upload {...uploadProps}><Button><Icon type="upload" />导入</Button></Upload> : ''}
           </Col>
         </Row>
       </div>

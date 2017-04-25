@@ -34,7 +34,7 @@ const RenderUtils = {
    * @returns {*}
    */
   bindRender(tableSchema, tableName, innerTableComponent) {
-    const {onClickImage, onSingleRecordUpdate, onSingleRecordDelete, onSingleRecordComponent, fieldMap, primaryKey} = innerTableComponent;
+    const { onClickImage, onSingleRecordUpdate, onSingleRecordDelete, onSingleRecordComponent, fieldMap, primaryKey } = innerTableComponent;
     // 命中缓存
     if (this.tableNameSet.has(tableName)) {
       return tableSchema;
@@ -80,10 +80,10 @@ const RenderUtils = {
   getImageRender() {
     return onClickImagePreview => text => {
       if (Utils.isString(text)) {
-        return <img src={text} alt="图片加载失败" style={{width: '100%'}} onClick={e => onClickImagePreview(text)}/>
+        return <img src={text} alt="图片加载失败" style={{ width: '100%' }} onClick={e => onClickImagePreview(text)} />
       } else if (text instanceof Array) {
         // 如果是多张图片, 只取第一张图片在表格中显示
-        return <img src={text[0]} alt="图片加载失败" style={{width: '100%'}} onClick={e => onClickImagePreview(text)}/>
+        return <img src={text[0]} alt="图片加载失败" style={{ width: '100%' }} onClick={e => onClickImagePreview(text)} />
       }
 
       return null;
@@ -108,7 +108,7 @@ const RenderUtils = {
       const urlArray = [];
       urlArray.push(<a key={0} href={text[0]} target="_blank">{text[0].substr(text[0].lastIndexOf('/') + 1)}</a>);
       for (let i = 1; i < text.length; i++) {
-        urlArray.push(<br key={ -1 - i }/>);
+        urlArray.push(<br key={ -1 - i } />);
         urlArray.push(<a key={i} href={text[i]} target="_blank">{text[i].substr(text[i].lastIndexOf('/') + 1)}</a>);
       }
       return <div>{urlArray}</div>;
@@ -154,7 +154,7 @@ const RenderUtils = {
           if (lastDivider) {
             actionArray.pop();
           }
-          actionArray.push(<br key={i}/>);
+          actionArray.push(<br key={i} />);
           lastDivider = false;
           continue;
         }
@@ -165,21 +165,24 @@ const RenderUtils = {
           // 更新单条记录, 可以控制更新哪些字段
           case 'update':
             tmp = <a href="#" key={i}
-                     onClick={e => {e.preventDefault();singleRecordUpdate(record, action.keys);}}>
+              onClick={e => {e.preventDefault(); singleRecordUpdate(record, action.keys);}}
+            >
               {action.name}
             </a>;
             break;
           // 删除单条记录
           case 'delete':
             tmp = <a href="#" key={i}
-                     onClick={e => {e.preventDefault();singleRecordDelete(record);}}>
+              onClick={e => {e.preventDefault(); singleRecordDelete(record);}}
+            >
               {action.name}
             </a>;
             break;
           // 自定义组件
           case 'component':
             tmp = <a href="#" key={i}
-                     onClick={e => {e.preventDefault();singleRecordComponent(record, action.component, action.name);}}>
+              onClick={e => {e.preventDefault(); singleRecordComponent(record, action.component, action.name);}}
+            >
               {action.name}
             </a>;
             break;
@@ -196,7 +199,7 @@ const RenderUtils = {
         }
 
         actionArray.push(tmp);
-        actionArray.push(<span key={ -1 - i } className="ant-divider"/>);  // 分隔符
+        actionArray.push(<span key={ -1 - i } className="ant-divider" />);  // 分隔符
         lastDivider = true;
       }
       // 去除最后一个分隔符, 为了美观
@@ -210,4 +213,4 @@ const RenderUtils = {
 };
 
 export default RenderUtils;
-export {ACTION_KEY};
+export { ACTION_KEY };

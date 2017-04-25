@@ -1,5 +1,5 @@
 import React from 'react';
-import {Pagination, Select} from 'antd';
+import { Pagination, Select } from 'antd';
 
 /**
  * 内部分页器组件
