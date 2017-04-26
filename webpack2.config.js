@@ -1,15 +1,8 @@
 const path = require('path')
 const webpack = require('webpack');
-const globalConfig = require('./src/config/index');
+const globalConfig = require('./src/config');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
-// 将babel-loader的配置独立出来, 因为webpack的限制: http://stackoverflow.com/questions/33117136/how-to-add-a-query-to-a-webpack-loader-with-multiple-loaders
-// const babelLoaderConfig = {
-//   presets: ['latest', 'stage-0', 'react'],  // 开启ES6、部分ES7、react特性, preset相当于预置的插件集合
-//   plugins: [['import', {libraryName: 'antd', style: true}]],  // antd模块化加载, https://github.com/ant-design/babel-plugin-import
-//   cacheDirectory: true,
-// };
 
 // 向less loader传的值, 用于覆盖less源文件中的变量
 // 有个小问题就是这个变量只会初始化一次, 不会随globalConfig的变化而变化
@@ -17,6 +10,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const lessLoaderVars = {
   sidebarCollapsible: globalConfig.sidebar.collapsible,
 };
+
+const buildPath = path.resolve(__dirname, 'dist')
 
 module.exports = {
   devtool: 'eval-source-map',
@@ -31,6 +26,7 @@ module.exports = {
   output: {  // 输出的目录和文件名
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
+    publicPath: '/',
   },
 
   resolve: {
@@ -38,6 +34,7 @@ module.exports = {
     extensions: ['.js', '.jsx'],  // require的时候可以直接使用require('file')，不用require('file.js')
     alias: {
       antdcss: 'antd/dist/antd.min.css',  // import时的别名
+      utils: './src/utils',
     },
   },
 
@@ -46,9 +43,6 @@ module.exports = {
       {
         test: /\.jsx?$/,
         use: [
-          {
-            loader: 'react-hot-loader',
-          },
           {
             loader: 'babel-loader',
             options: {
@@ -114,5 +108,6 @@ module.exports = {
       // 这个属性也是我自己定义的, dev模式下要加载一些额外的js
       devMode: true,
     }),
+    new webpack.HotModuleReplacementPlugin(),
   ],
 };

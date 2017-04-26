@@ -2,12 +2,6 @@
  * Created by 80920 on 2017/4/26.
  */
 //配置文件的入口文件
-// import api from './api'
-// import DBTable from './dbTable'
-// import login from './login'
-// import upload from './upload'
-// import global from './global'
-// import sidebar from './sidebar'
 const api = require('./api');
 const DBTable = require('./dbTable');
 const login = require('./login');
