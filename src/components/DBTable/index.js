@@ -1,5 +1,5 @@
 import React from 'react';
-import {message, notification, Spin} from 'antd';
+import {message, notification, Spin, Pagination} from 'antd';
 import Error from '../Error';
 import InnerForm from './InnerForm.js';
 import InnerTable from './InnerTable.js';
@@ -233,7 +233,7 @@ class DBTable extends React.PureComponent {
   /**
    * 按当前的查询条件重新查询一次
    */
-  refresh = async() => {
+  refresh = async () => {
     // 如果加载schema失败, 就不要查询了
     if (!this.inited) {
       return;
@@ -306,7 +306,7 @@ class DBTable extends React.PureComponent {
    *
    * @param page
    */
-  handlePageChange = async(page) => {
+  handlePageChange = async (page) => {
     logger.debug('handlePageChange, page = %d', page);
     const res = await this.select(this.state.queryObj, page, this.state.pageSize);
     if (res.success) {
@@ -326,7 +326,7 @@ class DBTable extends React.PureComponent {
    *
    * @param page
    */
-  handleShowPageChange = async(page, pageSize) => {
+  handleShowPageChange = async (page, pageSize) => {
     logger.debug('handleShowPageSizeChange, page = %d', page);
     const res = await this.select(this.state.queryObj, page, pageSize);
     if (res.success) {
@@ -347,7 +347,7 @@ class DBTable extends React.PureComponent {
    *
    * @param queryObj
    */
-  handleFormSubmit = async(queryObj) => {
+  handleFormSubmit = async (queryObj) => {
     logger.debug('handleFormSubmit, queryObj = %o', queryObj);
     // 这时查询条件已经变了, 要从第一页开始查
     const res = await this.select(queryObj, 1, this.state.pageSize);
@@ -357,7 +357,7 @@ class DBTable extends React.PureComponent {
         data: res.data,
         total: res.total,
         tableLoading: false,
-        queryObj: queryObj,
+        queryObj,
       });
     } else {
       this.error(res.message);
@@ -366,6 +366,7 @@ class DBTable extends React.PureComponent {
 
 
   render() {
+    const {total, pageSize, currentPage, showSizeChanger, pageSizeOptions} = this.state
     // 一段有些tricky的代码, 某些情况下显示一个特殊的loading
     // 主要是为了用户第一次进入的时候, 交互更友好
     // FIXME: 这段代码非常丑, (!this.inited && !this.errorMsg)这个条件是为了hack一个react-router的问题
@@ -375,7 +376,7 @@ class DBTable extends React.PureComponent {
       this.notFirstRender = true;
       return (
         <Spin tip="loading schema..." spinning={this.state.loadingSchema} delay={500}>
-          <div style={{ height: '150px', width: '100%' }}></div>
+          <div style={{height: '150px', width: '100%'}}></div>
         </Spin>
       );
     }
@@ -397,16 +398,35 @@ class DBTable extends React.PureComponent {
 
     return (
       <Spin spinning={this.state.loadingSchema} delay={500}>
-        <InnerForm parentHandleSubmit={this.handleFormSubmit} schema={this.querySchema} tableConfig={this.tableConfig}
-                   tableName={this.tableName}/>
-        <InnerTable data={this.state.data} tableLoading={this.state.tableLoading}
-                    schema={this.dataSchema} refresh={this.refresh}
-                    tableConfig={this.tableConfig} tableName={this.tableName}/>
-        <InnerPagination currentPage={this.state.currentPage} total={this.state.total} pageSize={this.state.pageSize}
-                         parentHandlePageChange={this.handlePageChange} tableConfig={this.tableConfig}
-                         showSizeChanger={this.state.showSizeChanger} pageSizeOptions={this.state.pageSizeOptions}
-                         parentHandleShowPageChange={this.handleShowPageChange}
-                         tableName={this.tableName}/>
+        <InnerForm
+          parentHandleSubmit={this.handleFormSubmit}
+          schema={this.querySchema}
+          tableConfig={this.tableConfig}
+          tableName={this.tableName}
+        />
+        <InnerTable
+          data={this.state.data}
+          tableLoading={this.state.tableLoading}
+          schema={this.dataSchema}
+          refresh={this.refresh}
+          tableConfig={this.tableConfig}
+          tableName={this.tableName}
+        />
+        <div className="db-pagination">
+          <Pagination
+            showQuickJumper
+            total={total}
+            showTotal={(totalSize, range) => `每页${range}条, 共 ${totalSize} 条`}
+            pageSize={pageSize}
+            defaultCurrent={1}
+            current={currentPage}
+            onChange={this.handlePageChange}
+            showSizeChanger={showSizeChanger}
+            onShowSizeChange={this.handleShowPageChange}
+            pageSizeOptions={pageSizeOptions}
+          />
+        </div>
+
       </Spin>
     );
   }

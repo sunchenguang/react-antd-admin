@@ -178,7 +178,7 @@ export default {
    */
   shouldIgnoreSchemaCache(tableName) {
     const tableConfig = this.getTableConfig(tableName);
-    return tableConfig.asyncSchema === true && tableConfig.ignoreSchemaCache === true;
+    return tableConfig.asyncSchema && tableConfig.ignoreSchemaCache;
   },
 
 }

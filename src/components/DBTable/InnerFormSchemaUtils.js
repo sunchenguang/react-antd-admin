@@ -200,7 +200,9 @@ const SchemaUtils = {
       options.push(<Option key={option.key} value={option.key}>{option.value}</Option>);
     });
 
-    return this.colWrapper(getFieldDecorator => getFieldDecorator(field.key, {initialValue: field.defaultValue})(
+    return this.colWrapper(getFieldDecorator => getFieldDecorator(field.key, {
+      initialValue: field.defaultValue,
+    })(
       <Select placeholder={field.placeholder || '请选择'} size="default">
         {options}
       </Select>
