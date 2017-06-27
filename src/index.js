@@ -25,6 +25,12 @@ const DBTableContainer = (location, cb) => {
   }, 'DBTable');
 };
 
+// const QueryFormContainer = (location, cb) => {
+//   require.ensure([], require => {
+//     cb(null, require('./components/DBTable/components/queryForm').default)
+//   }, 'queryForm');
+// };
+
 // 路由表, 只要menu.js中所有的叶子节点配置了路由就可以了
 // 我本来想根据menu.js自动生成路由表, 但那样太不灵活了, 还是自己配置好些
 const routes = (

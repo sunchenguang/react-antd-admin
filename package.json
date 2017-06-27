@@ -19,7 +19,7 @@
     "frontend"
   ],
   "devDependencies": {
-    "antd": "2.7.1",
+    "antd": "^2.11.2",
     "babel-core": "^6.21.0",
     "babel-eslint": "6.0.0",
     "babel-loader": "^6.2.10",

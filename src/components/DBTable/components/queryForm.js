@@ -14,8 +14,12 @@ import {
   InputNumber,
   Checkbox,
   Cascader,
+  Button,
 } from 'antd';
-import FormItemSelect from './formItem/formItemSelect'
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 class QueryForm extends Component {
   constructor(props) {
@@ -30,21 +34,39 @@ class QueryForm extends Component {
    */
   parse(schema) {
     const { getFieldDecorator } = this.props.form
-    let formItems = []
+    const formItems = []
     schema.forEach((field, index) => {
       let formItem
 
-      switch(field.showType) {
-        case 'select': {
-          formItem = <FormItemSelect field={field} getFieldDecorator={getFieldDecorator} />
+      switch (field.showType) {
+        case 'select':
+        case 'radio':
+        case 'checkbox': {
+          let fieldShowType = capitalizeFirstLetter(field.showType)
+          let FormItemComponent = require(`./formItem/form${fieldShowType}`).default
+          console.log(FormItemComponent)
+          formItem = <FormItemComponent key={field.key} field={field} getFieldDecorator={getFieldDecorator} />
           break
         }
 
         default:
-          break;
+          break
       }
       formItems.push(formItem)
     })
+    return formItems
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.form.validateFieldsAndScroll((err, values) => {
+      if (!err) {
+        console.log('Received values of form: ', values);
+
+        console.log(this.props.form.getFieldsValue())
+        // this.props.handleSubmit()
+      }
+    });
   }
 
   render() {
@@ -52,18 +74,17 @@ class QueryForm extends Component {
     let formRows = this.parse(this.props.schema)
 
     return (
-      <div>
-        <Form layout="horizontal" onSubmit={this.handleSubmit}>
+        <Form horizontal onSubmit={this.handleSubmit}>
           {formRows}
+          <Button type="primary" htmlType="submit"><Icon type="search"/>查询</Button>
         </Form>
-      </div>
     );
   }
 }
 
 QueryForm.propTypes = {
   tableName: PropTypes.string,
-  schema: PropTypes.object,
+  schema: PropTypes.array,
   form: PropTypes.object,
 };
 QueryForm.defaultProps = {};

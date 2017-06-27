@@ -10,6 +10,7 @@ import ajax from '../../utils/ajax';
 import Utils from '../../utils';
 import globalConfig from '../../config.js';
 import Logger from '../../utils/Logger';
+import QueryForm from './components/queryForm'
 
 const logger = Logger.getLogger('DBTable');
 
@@ -398,8 +399,14 @@ class DBTable extends React.PureComponent {
 
     return (
       <Spin spinning={this.state.loadingSchema} delay={500}>
-        <InnerForm
-          parentHandleSubmit={this.handleFormSubmit}
+        {/*<InnerForm*/}
+          {/*parentHandleSubmit={this.handleFormSubmit}*/}
+          {/*schema={this.querySchema}*/}
+          {/*tableConfig={this.tableConfig}*/}
+          {/*tableName={this.tableName}*/}
+        {/*/>*/}
+        <QueryForm
+          handleSubmit={this.handleFormSubmit}
           schema={this.querySchema}
           tableConfig={this.tableConfig}
           tableName={this.tableName}
