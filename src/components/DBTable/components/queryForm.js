@@ -39,13 +39,20 @@ class QueryForm extends Component {
       let formItem
 
       switch (field.showType) {
+        case 'input':
+        case 'cascader':
+        case 'between':
+        case 'datePicker':
+        case 'inputNumber':
         case 'select':
         case 'radio':
         case 'checkbox': {
           let fieldShowType = capitalizeFirstLetter(field.showType)
           let FormItemComponent = require(`./formItem/form${fieldShowType}`).default
-          console.log(FormItemComponent)
-          formItem = <FormItemComponent key={field.key} field={field} getFieldDecorator={getFieldDecorator} />
+          // console.log(FormItemComponent)
+          formItem = <FormItemComponent key={field.key}
+                                        field={field}
+                                        getFieldDecorator={getFieldDecorator} />
           break
         }
 
@@ -61,9 +68,9 @@ class QueryForm extends Component {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        // console.log('Received values of form: ', values);
 
-        console.log(this.props.form.getFieldsValue())
+        // console.log(this.props.form.getFieldsValue())
         // this.props.handleSubmit()
       }
     });
@@ -74,7 +81,7 @@ class QueryForm extends Component {
     let formRows = this.parse(this.props.schema)
 
     return (
-        <Form horizontal onSubmit={this.handleSubmit}>
+        <Form layout='horizontal' onSubmit={this.handleSubmit}>
           {formRows}
           <Button type="primary" htmlType="submit"><Icon type="search"/>查询</Button>
         </Form>

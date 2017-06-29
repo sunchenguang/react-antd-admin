@@ -2,15 +2,16 @@
  * Created by suncg on 2017/6/27.
  */
 import React, { Component, PropTypes } from 'react';
-import { Form, DatePicker, Input } from 'antd'
+import { Form, Select, Radio, Checkbox, InputNumber } from 'antd'
 
 const FormItem = Form.Item
+const CheckboxGroup = Checkbox.Group
 
-class FormInput extends Component {
+class FormInputNumber extends Component {
 
   render() {
     const {field, getFieldDecorator} = this.props
-    const {title, defaultValue, key, placeholder, addonBefore, addonAfter} = field
+    const {title, defaultValue, key, max, min, placeholder, step = 1} = field
 
     return (
       <FormItem label={title}>
@@ -18,7 +19,7 @@ class FormInput extends Component {
           getFieldDecorator(key, {
             initialValue: defaultValue,
           })(
-            <Input placeholder={placeholder} addonBefore={addonBefore} addonAfter={addonAfter}/>
+            <InputNumber max={max} min={min} placeholder={placeholder} step={step}/>
           )
         }
       </FormItem>
@@ -26,10 +27,10 @@ class FormInput extends Component {
   }
 }
 
-FormInput.propTypes = {
+FormInputNumber.propTypes = {
   field: PropTypes.object,
   getFieldDecorator: PropTypes.func,
 };
-FormInput.defaultProps = {};
+FormInputNumber.defaultProps = {};
 
-export default FormInput;
+export default FormInputNumber;

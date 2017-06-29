@@ -11,7 +11,7 @@ class FormSelect extends Component {
 
   render() {
     const { field, getFieldDecorator } = this.props
-    const { title, options, defaultValue, key, placeholder } = field
+    const { title, options, defaultValue, key, placeholder = '请选择', mode } = field
 
     return (
       <FormItem label={title}>
@@ -19,7 +19,7 @@ class FormSelect extends Component {
           getFieldDecorator(key, {
             initialValue: defaultValue,
           })(
-            <Select placeholder={placeholder || '请选择'}>
+            <Select placeholder={placeholder} mode={mode}>
               {
                 options.map((option) => {
                   return (

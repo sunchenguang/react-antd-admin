@@ -2,15 +2,15 @@
  * Created by suncg on 2017/6/27.
  */
 import React, { Component, PropTypes } from 'react';
-import { Form, DatePicker, Input } from 'antd'
+import { Form, Cascader } from 'antd'
 
 const FormItem = Form.Item
 
-class FormInput extends Component {
+class FormCascader extends Component {
 
   render() {
     const {field, getFieldDecorator} = this.props
-    const {title, defaultValue, key, placeholder, addonBefore, addonAfter} = field
+    const {title, options = [], defaultValue, key, placeholder = '请选择'} = field
 
     return (
       <FormItem label={title}>
@@ -18,7 +18,7 @@ class FormInput extends Component {
           getFieldDecorator(key, {
             initialValue: defaultValue,
           })(
-            <Input placeholder={placeholder} addonBefore={addonBefore} addonAfter={addonAfter}/>
+            <Cascader options={options} placeholder={placeholder}/>
           )
         }
       </FormItem>
@@ -26,10 +26,10 @@ class FormInput extends Component {
   }
 }
 
-FormInput.propTypes = {
+FormCascader.propTypes = {
   field: PropTypes.object,
   getFieldDecorator: PropTypes.func,
 };
-FormInput.defaultProps = {};
+FormCascader.defaultProps = {};
 
-export default FormInput;
+export default FormCascader;
