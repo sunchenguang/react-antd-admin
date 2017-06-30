@@ -10,7 +10,7 @@ const CheckboxGroup = Checkbox.Group
 class FormCheckbox extends Component {
 
   render() {
-    const { field, getFieldDecorator } = this.props
+    const { field, getFieldDecorator, formItemLayout } = this.props
     const { title, options, defaultValue, key } = field
     const CheckboxGroupOptions = options.map((option) => {
       return {
@@ -20,7 +20,7 @@ class FormCheckbox extends Component {
     })
 
     return (
-      <FormItem label={title}>
+      <FormItem label={title} {...formItemLayout}>
         {
           getFieldDecorator(key, {
             initialValue: defaultValue,

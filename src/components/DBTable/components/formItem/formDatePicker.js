@@ -9,11 +9,11 @@ const FormItem = Form.Item
 class FormDatePicker extends Component {
 
   render() {
-    const {field, getFieldDecorator} = this.props
+    const {field, getFieldDecorator, formItemLayout} = this.props
     const {title, defaultValue, key, showTime = true, format = 'YYYY-MM-DD HH:mm:ss', placeholder} = field
 
     return (
-      <FormItem label={title}>
+      <FormItem label={title} {...formItemLayout}>
         {
           getFieldDecorator(key, {
             initialValue: defaultValue,

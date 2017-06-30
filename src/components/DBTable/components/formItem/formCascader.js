@@ -9,11 +9,11 @@ const FormItem = Form.Item
 class FormCascader extends Component {
 
   render() {
-    const {field, getFieldDecorator} = this.props
+    const {field, getFieldDecorator, formItemLayout} = this.props
     const {title, options = [], defaultValue, key, placeholder = '请选择'} = field
 
     return (
-      <FormItem label={title}>
+      <FormItem label={title} {...formItemLayout}>
         {
           getFieldDecorator(key, {
             initialValue: defaultValue,

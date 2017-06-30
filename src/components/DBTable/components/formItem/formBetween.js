@@ -1,15 +1,15 @@
 /**
  * Created by suncg on 2017/6/27.
  */
-import React, { Component, PropTypes } from 'react';
-import { Form, InputNumber, DatePicker } from 'antd'
+import React, {Component, PropTypes} from 'react';
+import {Form, InputNumber, DatePicker} from 'antd'
 
 const FormItem = Form.Item
 
 class FormBetween extends Component {
 
   render() {
-    const {field, getFieldDecorator} = this.props
+    const {field, getFieldDecorator, formItemLayout} = this.props
     const {
       key, title, defaultValueBegin, defaultValueEnd, placeholderBegin, placeholderEnd,
       mode, step = 1
@@ -35,20 +35,13 @@ class FormBetween extends Component {
     }
 
     return (
-      <FormItem label={title}>
+      <FormItem label={title} {...formItemLayout}>
         {
-          getFieldDecorator(`${key}Begin`, {
-            initialValue: defaultValueBegin,
-          })(
-            components[0]
-          )
+          components[0]
         }
+         ~ &nbsp;
         {
-          getFieldDecorator(`${key}End`, {
-            initialValue: defaultValueEnd,
-          })(
-            components[1]
-          )
+          components[1]
         }
       </FormItem>
     );

@@ -5,16 +5,15 @@ import React, { Component, PropTypes } from 'react';
 import { Form, Select, Radio, Checkbox, InputNumber } from 'antd'
 
 const FormItem = Form.Item
-const CheckboxGroup = Checkbox.Group
 
 class FormInputNumber extends Component {
 
   render() {
-    const {field, getFieldDecorator} = this.props
+    const {field, getFieldDecorator, formItemLayout} = this.props
     const {title, defaultValue, key, max, min, placeholder, step = 1} = field
 
     return (
-      <FormItem label={title}>
+      <FormItem label={title} {...formItemLayout}>
         {
           getFieldDecorator(key, {
             initialValue: defaultValue,

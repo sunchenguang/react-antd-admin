@@ -9,11 +9,11 @@ const FormItem = Form.Item
 class FormInput extends Component {
 
   render() {
-    const {field, getFieldDecorator} = this.props
+    const {field, getFieldDecorator, formItemLayout} = this.props
     const {title, defaultValue, key, placeholder, addonBefore, addonAfter} = field
 
     return (
-      <FormItem label={title}>
+      <FormItem label={title} {...formItemLayout}>
         {
           getFieldDecorator(key, {
             initialValue: defaultValue,
