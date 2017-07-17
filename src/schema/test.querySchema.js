@@ -7,7 +7,7 @@ import {Icon} from 'antd';
 
 module.exports = [
   {
-    key: 'name',  // 传递给后端的字段名
+    key: 'username',  // 传递给后端的字段名
     title: '用户名',  // 前端显示的名称
     placeholder: '请输入用户名',  // 提示语, 可选
 

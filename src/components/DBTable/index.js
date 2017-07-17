@@ -43,6 +43,11 @@ class DBTable extends React.PureComponent {
     showSizeChanger: globalConfig.DBTable.showSizeChanger, // 是否显示修改每页显示数量的选项
     pageSizeOptions: globalConfig.DBTable.pageSizeOptions, // 每页面显示数量选项
     total: 0,  // 总共有多少条数据
+    fields: {
+      username: {
+        value: 'benjycui'
+      }
+    }
   };
 
 
@@ -365,6 +370,11 @@ class DBTable extends React.PureComponent {
     }
   };
 
+  handleFormChange = (changedFields) => {
+    this.setState({
+      fields: { ...this.state.fields, ...changedFields },
+    });
+  }
 
   render() {
     const {total, pageSize, currentPage, showSizeChanger, pageSizeOptions} = this.state
@@ -410,6 +420,8 @@ class DBTable extends React.PureComponent {
           schema={this.querySchema}
           tableConfig={this.tableConfig}
           tableName={this.tableName}
+          onChange={this.handleFormChange}
+          {...this.state.fields}
         />
         <InnerTable
           data={this.state.data}

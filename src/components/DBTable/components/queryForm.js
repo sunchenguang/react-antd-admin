@@ -180,4 +180,19 @@ QueryForm.propTypes = {
 };
 QueryForm.defaultProps = {};
 
-export default Form.create()(QueryForm);
+export default Form.create({
+  onFieldsChange(props, changedFields) {
+    props.onChange(changedFields);
+  },
+  mapPropsToFields(props) {
+    return {
+      username: {
+        ...props.username,
+        value: props.username.value.toUpperCase(),
+      },
+    };
+  },
+  onValuesChange(_, values) {
+    console.log(values);
+  },
+})(QueryForm);
